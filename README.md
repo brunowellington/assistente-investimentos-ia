@@ -97,10 +97,7 @@ curl -X POST http://127.0.0.1:8000/analyze \
   "ativos": ["PETR4.SA", "VALE3.SA"]
 }
 ```
-
-Use somente dados fictícios durante os testes. O campo `ativos` é opcional e contém símbolos de mercado para consulta demonstrativa.
-
-## 3. Configuração de IA (opcional)
+## 3. Configuração de IA
 
 Copie `.env.example` para `.env` e configure **apenas um** provedor:
 
@@ -108,11 +105,11 @@ Copie `.env.example` para `.env` e configure **apenas um** provedor:
 - Gemini: `LLM_PROVIDER=gemini` e `GEMINI_API_KEY=...`
 - Sem LLM: `LLM_PROVIDER=none`
 
-A IA é usada somente para redigir uma explicação baseada nos dados calculados. Ela não deve inventar cotações nem substituir validação humana. Nunca coloque chaves de API no GitHub.
+A IA é usada somente para redigir uma explicação baseada nos dados calculados.
 
 ## 4. n8n
 
-O arquivo `n8n/workflow-exemplo.json` é um ponto de partida para importar no n8n. Configure o webhook e a URL da API de análise (por padrão `http://host.docker.internal:8000/analyze` quando o n8n roda em Docker no mesmo computador). Em Linux, `host.docker.internal` pode exigir configuração extra; em produção, use uma URL privada alcançável pela instância n8n.
+O arquivo `n8n/workflow.json` é um ponto de partida para importar no n8n. Configure o webhook e a URL da API de análise (por padrão `http://host.docker.internal:8000/analyze` quando o n8n roda em Docker no mesmo computador). Em Linux, `host.docker.internal` pode exigir configuração extra; em produção, use uma URL privada alcançável pela instância n8n.
 
 Fluxo sugerido:
 1. **Webhook** (`POST /investimentos`) recebe o JSON.
