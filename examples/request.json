@@ -1,0 +1,7 @@
+{
+  "nome": "Marinaldo",
+  "perfil": "moderado",
+  "capital": 50000,
+  "email": "cliente@example.com",
+  "ativos": ["PETR4.SA", "VALE3.SA"]
+}

@@ -1,0 +1,93 @@
+{
+  "name": "Assistente de Investimentos - MVP",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "investimentos",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "a6bd8d28-3c6a-4e61-8ad3-a0e4c2b3f100",
+      "name": "Webhook Investimentos",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "investimentos-mvp-demo"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://host.docker.internal:8000/analyze",
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify($json.body ?? $json) }}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "a6bd8d28-3c6a-4e61-8ad3-a0e4c2b3f101",
+      "name": "Analisar com API Python",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        260,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "id": "a6bd8d28-3c6a-4e61-8ad3-a0e4c2b3f102",
+      "name": "Responder ao Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        520,
+        0
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook Investimentos": {
+      "main": [
+        [
+          {
+            "node": "Analisar com API Python",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analisar com API Python": {
+      "main": [
+        [
+          {
+            "node": "Responder ao Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "a6bd8d28-3c6a-4e61-8ad3-a0e4c2b3f103",
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}
