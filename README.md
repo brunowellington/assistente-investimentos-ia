@@ -90,9 +90,9 @@ curl -X POST http://127.0.0.1:8000/analyze \
 
 ```json
 {
-  "nome": "Marinaldo",
+  "nome": "naldo",
   "perfil": "moderado",
-  "capital": 50000,
+  "capital": 20000,
   "email": "cliente@example.com",
   "ativos": ["PETR4.SA", "VALE3.SA"]
 }
